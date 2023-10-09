@@ -1,0 +1,132 @@
+
+/* 
+Generally, an accordion is used to make expandable HTML contents on a Web page.
+
+Initially, we’ll build an HTML structure for our accordion to expand collapse text
+
+
+
+The difference between an accordion and a dropdown:
+
+Accordion:-
+
+#Content pushes the page content down
+#Content is often 100% wide
+#Often used to open multiple sections
+
+
+Dropdown:-
+
+#Content lays over existing the page content
+#Content is 160px wide (default)
+#Often used to open one section
+
+
+*/
+
+
+
+
+
+/* Now, it’s time to style and functionalities the accordion using CSS */
+
+
+/* this is only to see how accordian works */
+/* .container1 {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 5px solid black;
+} */
+
+
+/* 1 */
+/* In CSS coding,  first of all we’ll hide the input element. */
+/* The input with type “radio” or “checkbox” will be used to get checked and unchecked value through the label tag.
+ The label tag we placed under h2 (that has class handle) for visible area of collapsible text. 
+ So, the actual HTML input radio element must be invisible from the users. */
+
+.accordion > input[name="collapse"] {
+    display: none;
+  }
+
+
+/* 2 */
+/* we’ll design the accordion’s content area. 
+On page load, this area will not be visible to the users.
+ It will expand on click event (that we’ll get from CSS :checked pseudo selector). */
+/* (2A) */
+  .accordion .content {
+    background: white;
+    /* (2B) this is to done to hide the content */
+    /* We used 0 value for height and overflow kept to hide.
+     We did so to bring smoothness while toggle (hide & show) text contents. 
+     Keep in mind that display none property will also work here, 
+     but CSS transition attribute (for smoothness) is not compatible with it. */
+
+     /* overflow: hidden; */
+    height: 0;
+     transition: 0.5s; 
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #d75a5a;  /* adding text color */
+    visibility: hidden;
+  }
+  
+
+
+
+/* 3 */
+/* we’ll design the visible area (heading of text contents) */
+.accordion label {
+    color: #fff;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 10px;
+    background: #b0100c;
+    
+  }
+
+
+
+   /* 4 */
+   /* we will set hover and focus effect */
+  .accordion label:hover,
+  .accordion label:focus {
+    background: #252525;
+  }
+ 
+
+   /* 5 */
+   /* now we want put icon before the heading  */
+  .accordion .handle label:before {
+    font-family: FontAwesome;
+    content: "\f107";
+
+    /* (5A) we had display: inline; to see what this happen*/
+    display: inline;
+    /* display: inline-block; */
+    
+    margin-right: 10px;
+    font-size: 1em;
+    line-height: 1.556em;
+    vertical-align: middle;
+    transition: 0.5s; 
+    
+  }
+
+ /* 6 */
+ /* we want to have the transform when checkbox is checked */
+  .accordion > input[name="collapse"]:checked ~ .handle label:before {
+    transform: rotate(180deg);
+    transform-origin: center;
+    transition: 0.5s;
+}
+
+/* 7 */
+/* Finally, define height value (according to the text length in content div) with :checked selector to smoothly expand collapse text in accordion. */
+/* You can also set height value to auto but it will not expand contents smoothly. However, other functionalities will remain same. */
+.accordion > input[name="collapse"]:checked ~ .content {
+    height: 380px;
+    transition: height 0.5s;
+    visibility: visible;
+  } 
+
